@@ -12,10 +12,14 @@ figure; hold on;
 %               examples and 'ko' for the negative examples.
 %
 
+% Find the indices (in y) of positive and negative examples
+pos = find(y == 1);
+neg = find(y == 0);
 
+% Plot the examples
+plot(X(pos, 1), X(pos, 2), 'rp','LineWidth', 2,'MarkerSize', 7);
 
-
-
+plot(X(neg, 1), X(neg, 2), 'gh','LineWidth', 2,'MarkerSize', 7);
 
 
 
