@@ -74,7 +74,7 @@ y = I(y,:);
 J = (1/m)*(-sum(sum(y.*log(H2) + (1 - y).*log(1 - H2))));
 
 % Add the regularization
-%J = J + (lambda/(2*m))*
+%J = J + (lambda/(2*m))*(sum(sum(Theta1.^2)) + sum(sum(Theta.^2)));
 
 
 
