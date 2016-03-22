@@ -63,6 +63,7 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+% Cost function
 a1 = [ones(m,1) X];
 z2 = a1*Theta1';
 H1 = sigmoid(z2);
@@ -73,19 +74,31 @@ I = eye(num_labels);
 y = I(y,:);
 J = (1/m)*(-sum(sum(y.*log(H2) + (1 - y).*log(1 - H2))));
 
-% Add the regularization
+% Regularized cost function
 J = J + (lambda/(2*m))*(sum(sum(Theta1(:, 2:end).^2)) + sum(sum(Theta2(:, 2:end).^2)));
 
+% Backpropagation - complete sigmoidGradient.m first
+Delta1 = 0;
+Delta2 = 0;
 
+for t = 1:m
+	a1 = [1; X(t, :)'];
+	z2 = Theta1*a1;
+	a2 = [1; sigmoid(z2)];
 
+	z3 = Theta2*a2;
+	a3 = sigmoid(z3);
 
+	d3 = a3 - y(t, :)';
 
+	d2 = ((Theta2(:, 2:end))'*d3).*sigmoidGradient(z2);
 
+	Delta2 = Delta2 + d3*a2';
+	Delta1 = Delta1 + d2*a1';
+end
 
-
-
-
-
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
 
 
