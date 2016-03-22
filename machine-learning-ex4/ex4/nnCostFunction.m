@@ -63,7 +63,18 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+a1 = [ones(m,1) X];
+z2 = a1*Theta1';
+H1 = sigmoid(z2);
+a2 = [ones(size(z2,1),1) H1];
+z3 = a2*Theta2';
+H2 = sigmoid(z3);
+I = eye(num_labels);
+y = I(y,:);
+J = (1/m)*(-sum(sum(y.*log(H2) + (1 - y).*log(1 - H2))));
 
+% Add the regularization
+%J = J + (lambda/(2*m))*
 
 
 
