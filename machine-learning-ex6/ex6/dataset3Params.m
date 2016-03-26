@@ -24,8 +24,20 @@ sigma = 0.3;
 %
 
 
-
-
+steps = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30]';
+bigError = Inf;
+for i = 1:size(steps)
+	for j = 1:size(steps)
+		model = svmTrain(X,y, steps(i), @(x1, x2) gaussianKernel(x1, x2, steps(j)));
+		predictions = svmPredict(model, Xval);
+		error = mean(double(predictions ~= yval));
+		if error < bigError
+			bigError = error;
+			C = steps(i);
+			sigma = steps(j);
+		end
+	end
+end
 
 
 
