@@ -27,7 +27,9 @@ centroids = zeros(K, n);
 %
 
 
-
+for i = 1:K
+	centroids(i, :) = sum(X(idx == i, :))/max(sum(idx == i),1);
+end
 
 
 
