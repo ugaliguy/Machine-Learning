@@ -21,7 +21,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
+for i = 1:size(X, 1)
+	distance = Inf;
+	for j = 1:K
+		squareDistance = sum((X(i,:) - centroids(j, :)).^2);
+		if squareDistance <= distance
+			distance = squareDistance;
+			idx(i) = j;
+		end
+	end
+end
 
 
 
