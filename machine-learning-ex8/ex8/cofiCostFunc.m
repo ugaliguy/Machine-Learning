@@ -44,8 +44,9 @@ H =(X*Theta' - Y).^2 ;
 J = (1/2)*sum(sum(H.*R));
 J = J + (lambda/2)*(sum(sum(Theta.^2)) + sum(sum(X.^2)));
 
-
-
+% Collaborative Filtering Gradient - Unregularized
+X_grad = (X*Theta' - Y).*R*Theta;
+Theta_grad  = ((X*Theta' - Y).*R)'*X;
 
 
 
